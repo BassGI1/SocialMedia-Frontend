@@ -1,0 +1,21 @@
+.loading-modal-outer{
+    border-radius: 50%;
+    overflow: hidden;
+    animation: spin 1.2s linear forwards infinite;
+    -webkit-box-shadow: inset 0px 0px 0px 10px rgb(172, 171, 171);
+    -moz-box-shadow: inset 0px 0px 0px 10px rgb(172, 171, 171);
+    box-shadow: inset 0px 0px 0px 10px rgb(172, 171, 171);
+}
+
+.loading-modal-inner{
+    width: calc(103% - 10px);
+    height: calc(103% - 10px);
+    border-radius: 50%;
+    background-color: #363636;
+}
+
+@keyframes spin {
+    100%{
+        transform: rotate(360deg);
+    }
+}

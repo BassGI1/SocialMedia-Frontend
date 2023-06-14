@@ -1,0 +1,75 @@
+.darkened-out-background-div{
+    z-index: 6;
+    background-color: rgba(0, 0, 0, 0.25);
+    position: absolute;
+    height: 87%;
+}
+
+.interactive-div{
+    width: 50%;
+    height: 50%;
+    background-color: #CCA43B;
+    border-radius: 2rem;
+}
+
+@keyframes expand {
+    100%{
+        width: 85%;
+        height: 85%;
+    }
+}
+
+.expand{
+    animation: expand 1.5s forwards;
+}
+
+.back-arrow{
+    position: absolute;
+    cursor: pointer;
+    height: 12.5%;
+    top: 9%;
+    left: 10%;
+    opacity: 0.75;
+    z-index: 3;
+}
+
+.back-arrow:hover{
+    opacity: 1;
+}
+
+.change-profile-side-div{
+    height: 82.5%;
+    top: 8.75%;
+    position: relative;
+}
+
+.paginate-button-div{
+    width: 10%;
+    height: 90%;
+    position: relative;
+}
+
+.main-music-div{
+    width: 80%;
+    height: 90%;
+    position: relative;
+}
+
+.paginate-button{
+    background-color: #d19705;
+    color: #363636;
+}
+
+.track-div-edit:hover{
+    animation: track-div-edit 0.35s forwards;
+}
+
+@keyframes track-div-edit{
+    100%{
+        background-color: #b08008;
+    }
+}
+
+.music-done-hover:hover{
+    background-color: #b08008;
+}

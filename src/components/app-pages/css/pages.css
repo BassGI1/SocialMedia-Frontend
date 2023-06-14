@@ -1,0 +1,66 @@
+.page-with-navbar-background-div{
+    width: 100%;
+    height: 87.5%;
+  }
+
+  .profile-page-side-card-background{
+    width: 30%;
+    height: 87.5vh;
+    background: rgb(38,38,46);
+    background: -moz-linear-gradient(180deg, rgba(38,38,46,1) 35%, rgba(54,54,54,1) 100%);
+    background: -webkit-linear-gradient(180deg, rgba(38,38,46,1) 35%, rgba(54,54,54,1) 100%);
+    background: linear-gradient(180deg, rgba(38,38,46,1) 35%, rgba(54,54,54,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#26262e",endColorstr="#363636",GradientType=1);
+    border-top-right-radius: 1rem;
+    cursor: default;
+  }
+
+  .profile-page-side-card-background:hover{
+    animation: side-card-heighten 0.2s forwards;
+  }
+
+  @keyframes side-card-heighten {
+    0%{
+        z-index: 2;
+    }
+    100%{
+        transform: translateY(-2%);
+    }
+  }
+
+.profile-image{
+    width: 30%;
+    border-radius: 1rem;
+    border: 0.25rem solid white;
+}
+
+.music-div{
+    height: 35%;
+    flex-direction: row;
+}
+
+.edit-icon{
+    height: 8vh;
+    position: relative;
+    cursor: pointer;
+    margin-top: 2vh;
+    right: 40%;
+    opacity: 0.03;
+}
+
+.edit-icon:hover{
+    opacity: 0.25;
+}
+
+.follow-icon{
+  height: 8vh;
+  position: relative;
+  cursor: pointer;
+  margin-top: 1vh;
+  left: 40%;
+  opacity: 0.25;
+}
+
+.follow-icon:hover{
+  opacity: 0.75;
+}

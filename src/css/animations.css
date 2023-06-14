@@ -1,0 +1,41 @@
+@keyframes signUp{
+    0%{
+        transform: translateY(125%);
+    }
+    100%{
+        transform: translateY(0%);
+    }
+}
+
+@keyframes signup-move-right{
+    100%{
+        transform: translateX(100%);
+    }
+}
+
+@keyframes signup-move-left {
+    100%{
+        transform: translateX(0%);
+    }
+}
+
+@keyframes finish-signup-middle-div-animation {
+    0%{
+        background-color: #363636;
+    }
+    30%{
+        background-color: #363636;
+    }
+    100%{
+        background-color: #242F40;
+    }
+}
+
+@keyframes track-div {
+    0%{
+        background-color: #242F40;
+    }
+    100%{
+        background-color: #345689;
+    }
+}

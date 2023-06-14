@@ -1,0 +1,47 @@
+.post-background-div{
+    height: 33.33%;
+    box-shadow: 0 0.65rem 0.35rem -0.35rem #26262e;
+    cursor: pointer;
+    transition: transform 0.15s;
+}
+
+.post-background-div:hover{
+    transform: scale(1.03);
+}
+
+.info-div{
+    width: 20%;
+    position: relative;
+    flex-direction: column;
+    height: 80%;
+}
+
+.post-div{
+    width: 80%;
+    position: relative;
+    flex-direction: column;
+}
+
+.underline-hover:hover{
+    text-decoration: underline;
+}
+
+.heart{
+    width: 2.5%;
+}
+
+.heart-animate{
+    animation: heart-animate 0.25s forwards;
+}
+
+@keyframes heart-animate {
+    0%{
+        width: 2.5%;
+    }
+    50%{
+        width: 4%;
+    }
+    100%{
+        width: 2.5%;
+    }
+}
