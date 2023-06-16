@@ -233,7 +233,15 @@ body{
   position: relative;
   width: 90%;
   height: 67.5%;
-  background-color: green;
+  display: flex;
+  flex-direction: column-reverse;
+  overflow: auto;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.messages-container::-webkit-scrollbar {
+  display: none;
 }
 
 .write-message-div{
@@ -272,4 +280,35 @@ body{
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.message-bubble-from-me{
+  width: 50%;
+  word-break: break-all;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background-color: #CCA43B;
+  color: white;
+  left: 48%;
+  border-radius: 1rem;
+  margin: 2vh 0vh;
+  cursor: default;
+  padding: 1%;
+}
+
+.message-bubble-not-from-me{
+  max-width: 50%;
+  word-break: break-all;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background-color: #363636;
+  color: white;
+  border-radius: 1rem;
+  margin: 2vh 0vh;
+  cursor: default;
+  padding: 1%;
 }

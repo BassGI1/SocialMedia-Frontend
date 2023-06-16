@@ -11,6 +11,8 @@ import DMSideCard from "./app-components/DMSideCard.js"
 
 export default function Home({ userId }){
 
+    if (!userId) window.location.assign("/signup")
+
     const [renderDMs, setRenderDMs] = useState(false)
 
     return (
