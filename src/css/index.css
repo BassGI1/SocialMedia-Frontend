@@ -312,3 +312,10 @@ body{
   cursor: default;
   padding: 1%;
 }
+
+.message-date{
+  position: absolute;
+  bottom: -1.9rem;
+  color: white;
+  font-size: 0.7rem;
+}

@@ -4,6 +4,23 @@ import LoadingModal from "./utils/LoadingModal.js"
 
 import noImage from "../assets/noImage.png"
 import sendButton from "../assets/sendButton.png"
+import play from "../assets/play.png"
+import pause from "../assets/pause.png"
+
+const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+]
 
 export default function DMPage({ userId }){
 
@@ -12,7 +29,9 @@ export default function DMPage({ userId }){
     const [currentUser, setCurrentUser] = useState(null)
     const [otherUser, setOtherUser] = useState(null)
     const [messages, setMessages] = useState(null)
+    const [music, setMusic] = useState(null)
     const [int, setInt] = useState(null)
+    const [musicImg, setMusicImg] = useState(play)
 
     useEffect(() => {
         fetch(`http://localhost:5000/api/getroom?id=${RoomId}`)
@@ -24,13 +43,19 @@ export default function DMPage({ userId }){
             .then(res => res.json())
             .then(userOne => {
                 if (userOne.id === userId) setCurrentUser(userOne)
-                else setOtherUser(userOne)
+                else {
+                    setOtherUser(userOne)
+                    if (userOne.theme) setMusic(new Audio(userOne.theme.preview_url))
+                }
             })
             fetch(`http://localhost:5000/api/getuser?_id=${data.userTwo}`)
             .then(res => res.json())
             .then(userTwo => {
                 if (userTwo.id === userId) setCurrentUser(userTwo)
-                else setOtherUser(userTwo)
+                else {
+                    setOtherUser(userTwo)
+                    if (userTwo.theme) setMusic(new Audio(userTwo.theme.preview_url))
+                }
             })
         })
         .catch(x => console.log(x))
@@ -45,14 +70,32 @@ export default function DMPage({ userId }){
         }, 3000))
     }, [])
 
+    useEffect(() => {
+        if (music) music.addEventListener("ended", (e) => setMusicImg(play))
+    }, [music])
+
+    const playMusic = () => {
+        if (music){
+            if (music.paused && ((music.readyState === 4) || (music.readyState === 3))){
+                setMusicImg(pause)
+                music.play()
+            }
+            else {
+                setMusicImg(play)
+                music.pause()
+            }
+        }
+    }
+
     return (
         <div className="flex-100">
             <div className="room-background-div">
                 {!currentUser && !otherUser && <LoadingModal backgroundColor="#1e1b1b" barColor="white"/>}
                 {currentUser && otherUser && <div className="messages-background">
                     <div className="top-header-dm-div flex-100">
-                        <img src={noImage} alt="profile image" style={{height: "60%", borderRadius: "50%", border: "0.2rem solid white", marginRight: "5%"}}/>
+                        <img src={noImage} alt="profile image" style={{height: "60%", borderRadius: "50%", border: "0.2rem solid white", marginRight: "5%", cursor: "pointer"}} onClick={() => window.location.assign(`/app/profile/${otherUser.username}`)}/>
                         {`${otherUser.firstName} ${otherUser.lastName}`}
+                        <img src={musicImg} alt={`${musicImg === play ? "play" : "pause"}`}  onClick={playMusic} style={{height: "45%", marginLeft: "5%", cursor: "pointer"}}/>
                     </div>
                     <Messages messages={messages} currentUserId={currentUser.id}/>
                     <WriteMessage roomId={room._id} userId={currentUser.id} />
@@ -81,7 +124,6 @@ const WriteMessage = ({ roomId, userId }) => {
             })
             .then(res => res.json())
             .then(data => {
-                console.log(data)
                 setSending(false)
                 document.querySelector("#message").value = ""
                 text.current = ""
@@ -102,16 +144,27 @@ const Messages = ({ messages, currentUserId }) => {
     return (
         <div className={`${messages ? "messages-container" : "flex-100"}`}>
             {messages && !messages.length && <h1 className="flex-100" style={{color: "white"}}>No messages . . . Start the conversation!</h1>}
-            {!messages && <LoadingModal backgroundColor="#1e1b1b" barColor="white"/>}
-            {messages && messages.length && messages.map(x => <MessageBubble key={x.created} fromCurrentUser={x.userId === currentUserId} created={x.created} message={x.message} />)}
+            {!messages && <LoadingModal backgroundColor="#1e1b1b" barColor="white" height="3.5rem" width="3.5rem" barWidth="3.5px"/>}
+            {messages && messages.length ? messages.map(x => <MessageBubble key={x.created} fromCurrentUser={x.userId === currentUserId} created={x.created} message={x.message} />) : ""}
         </div>
     )
 }
 
 const MessageBubble = ({ message, fromCurrentUser, created }) => {
+    const date = useRef(() => {
+        const d = new Date(created)
+        const td = new Date()
+        if (d.getDate() === td.getDate() && d.getFullYear() === td.getFullYear() && d.getMonth() === td.getMonth()){
+            if (d.getHours() > 12) return `${d.getHours() % 12}:${d.getMinutes()} PM`
+            return `${d.getHours()}:${d.getMinutes()} AM`
+        }
+        if (d.getHours() > 12) return `${d.getHours() % 12}:${d.getMinutes()} PM on ${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}` 
+        return `${d.getHours()}:${d.getMinutes()} AM on ${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}` 
+    })
     return (
         <div className={`${fromCurrentUser ? "message-bubble-from-me" : "message-bubble-not-from-me"}`}>
             {message}
+            <p className="message-date">Sent {date.current()}</p>
         </div>
     )
 }
