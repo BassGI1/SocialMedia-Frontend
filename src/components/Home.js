@@ -17,7 +17,7 @@ export default function Home({ userId }){
 
     return (
         <div className="background-div">
-            <Navbar renderDMs={renderDMs} setRenderDMs={setRenderDMs}/>
+            <Navbar userId={userId} renderDMs={renderDMs} setRenderDMs={setRenderDMs}/>
             {renderDMs && <DMSideCard userId={userId} setRenderDMs={setRenderDMs}/>}
             <Routes>
                 <Route path="/profile/:username" element={<ProfilePage id={userId} setRenderDMs={setRenderDMs} />}/>

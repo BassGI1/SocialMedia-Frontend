@@ -30,7 +30,6 @@ export default function DMPage({ userId }){
     const [otherUser, setOtherUser] = useState(null)
     const [messages, setMessages] = useState(null)
     const [music, setMusic] = useState(null)
-    const [int, setInt] = useState(null)
     const [musicImg, setMusicImg] = useState(play)
 
     useEffect(() => {
@@ -59,7 +58,7 @@ export default function DMPage({ userId }){
             })
         })
         .catch(x => console.log(x))
-        setInt(setInterval(() => {
+        setInterval(() => {
             fetch(`http://localhost:5000/api/getroom?id=${RoomId}`)
             .then(res => res.json())
             .then(data => {
@@ -67,8 +66,8 @@ export default function DMPage({ userId }){
                 setMessages(m)
             })
             .catch(x => console.log(x))
-        }, 3000))
-    }, [])
+        }, 3000)
+    }, [RoomId, userId])
 
     useEffect(() => {
         if (music) music.addEventListener("ended", (e) => setMusicImg(play))
@@ -93,9 +92,9 @@ export default function DMPage({ userId }){
                 {!currentUser && !otherUser && <LoadingModal backgroundColor="#1e1b1b" barColor="white"/>}
                 {currentUser && otherUser && <div className="messages-background">
                     <div className="top-header-dm-div flex-100">
-                        <img src={noImage} alt="profile image" style={{height: "60%", borderRadius: "50%", border: "0.2rem solid white", marginRight: "5%", cursor: "pointer"}} onClick={() => window.location.assign(`/app/profile/${otherUser.username}`)}/>
-                        {`${otherUser.firstName} ${otherUser.lastName}`}
-                        <img src={musicImg} alt={`${musicImg === play ? "play" : "pause"}`}  onClick={playMusic} style={{height: "45%", marginLeft: "5%", cursor: "pointer"}}/>
+                        <img src={noImage} alt="profile" style={{height: "60%", borderRadius: "50%", border: "0.2rem solid white", marginRight: "5%", cursor: "pointer"}} onClick={() => window.location.assign(`/app/profile/${otherUser.username}`)}/>
+                        {`${otherUser.firstName || "deleted"} ${otherUser.lastName || "user"}`}
+                        {music && <img src={musicImg} alt={`${musicImg === play ? "play" : "pause"}`}  onClick={playMusic} style={{height: "45%", marginLeft: "5%", cursor: "pointer"}}/>}
                     </div>
                     <Messages messages={messages} currentUserId={currentUser.id}/>
                     <WriteMessage roomId={room._id} userId={currentUser.id} />
@@ -155,11 +154,11 @@ const MessageBubble = ({ message, fromCurrentUser, created }) => {
         const d = new Date(created)
         const td = new Date()
         if (d.getDate() === td.getDate() && d.getFullYear() === td.getFullYear() && d.getMonth() === td.getMonth()){
-            if (d.getHours() > 12) return `${d.getHours() % 12}:${d.getMinutes()} PM`
-            return `${d.getHours()}:${d.getMinutes()} AM`
+            if (d.getHours() > 11) return `${d.getHours() % 12 === 0 ? 12 : d.getHours() % 12}:${d.getMinutes() < 10 ? `0${d.getMinutes()}` : d.getMinutes()} PM`
+            return `${d.getHours()}:${d.getMinutes() < 10 ? `0${d.getMinutes()}` : d.getMinutes()} AM`
         }
-        if (d.getHours() > 12) return `${d.getHours() % 12}:${d.getMinutes()} PM on ${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}` 
-        return `${d.getHours()}:${d.getMinutes()} AM on ${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}` 
+        if (d.getHours() > 11) return `${d.getHours() % 12 === 0 ? 12 : d.getHours() % 12}:${d.getMinutes() < 10 ? `0${d.getMinutes()}` : d.getMinutes()} PM on ${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}` 
+        return `${d.getHours()}:${d.getMinutes() < 10 ? `0${d.getMinutes()}` : d.getMinutes()} AM on ${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}` 
     })
     return (
         <div className={`${fromCurrentUser ? "message-bubble-from-me" : "message-bubble-not-from-me"}`}>

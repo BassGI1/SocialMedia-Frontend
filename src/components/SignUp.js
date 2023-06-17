@@ -115,32 +115,32 @@ function SignUpInfo({ setUserId, setCreated }){
             <h1 className="sign-page-title" style={{transform: "translateY(10%)"}}>Sign Up</h1>
             <div className="signup-input-div" style={{height: "37.5%", transform: "translateY(-35%)"}}>
                 <div style={{width: "100%", height: "20%", display: "flex", justifyContent: "center", alignItems: "center"}}>
-                    <input type="email" placeholder="Enter your email" className="signup-input" onChange={(e) => {
+                    <input type="email" placeholder="Enter your email" maxLength={25} className="signup-input" onChange={(e) => {
                         info.email = e.target.value
                     }}/>
                 </div>
                 <div style={{width: "100%", height: "20%", display: "flex", justifyContent: "center", alignItems: "center"}}>
-                    <input type="text" placeholder="Enter your username" className="signup-input" onChange={(e) => {
+                    <input type="text" placeholder="Enter your username" maxLength={12} className="signup-input" onChange={(e) => {
                         info.username = e.target.value
                     }}/>
                 </div>
                 <div style={{width: "100%", height: "20%", display: "flex", justifyContent: "center", alignItems: "center"}}>
-                    <input type="password" placeholder="Enter your password" className="signup-input" onChange={(e) => {
+                    <input type="password" placeholder="Enter your password" minLength={7} maxLength={20} className="signup-input" onChange={(e) => {
                         info.password = e.target.value
                     }}/>
                 </div>
                 <div style={{width: "100%", height: "20%", display: "flex", justifyContent: "center", alignItems: "center"}}>
-                    <input type="password" placeholder="Verify your password" className="signup-input" onChange={(e) => {
+                    <input type="password" placeholder="Verify your password" minLength={7} maxLength={20}  className="signup-input" onChange={(e) => {
                         info.passwordVerifier = e.target.value
                     }}/>
                 </div>
                 <div style={{width: "100%", height: "20%", display: "flex", justifyContent: "center", alignItems: "center"}}>
-                    <input type="text" placeholder="Enter your first name" className="signup-input" onChange={(e) => {
+                    <input type="text" placeholder="Enter your first name" maxLength={15} className="signup-input" onChange={(e) => {
                         info.firstName = e.target.value
                     }}/>
                 </div>
                 <div style={{width: "100%", height: "20%", display: "flex", justifyContent: "center", alignItems: "center"}}>
-                    <input type="text" placeholder="Enter your last name" className="signup-input" onChange={(e) => {
+                    <input type="text" placeholder="Enter your last name" maxLength={15} className="signup-input" onChange={(e) => {
                         info.lastName = e.target.value
                     }}/>
                 </div>
