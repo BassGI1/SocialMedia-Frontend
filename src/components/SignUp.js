@@ -46,7 +46,7 @@ function SignInInfo({ setUserId, setCreated }) {
         .then(data => {
             if (data["success"]){
                 const jsonString = JSON.stringify({user_id: data["_id"], created: data["created"]})
-                document.cookie = jsonString
+                document.cookie = "user=" + jsonString
                 setCreated(data["created"])
                 setUserId(data["_id"])
                 window.location.assign("/")
@@ -98,7 +98,7 @@ function SignUpInfo({ setUserId, setCreated }){
         .then(data => {
             if (data["success"]){
                 const jsonString = JSON.stringify({user_id: data["_id"], created: data["created"]})
-                document.cookie = jsonString
+                document.cookie = "user=" + jsonString
                 setCreated(data["created"])
                 setUserId(data["_id"])
                 window.location.assign("/signupcompletion")

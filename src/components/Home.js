@@ -8,6 +8,7 @@ import PostPage from "./app-pages/PostPage.js"
 import SuggestionBox from "./app-pages/SuggestionBox.js"
 import HomePage from "./app-pages/HomePage.js"
 import DMSideCard from "./app-components/DMSideCard.js"
+import DeleteAccount from "./app-pages/DeleteAccount"
 
 export default function Home({ userId }){
 
@@ -23,6 +24,7 @@ export default function Home({ userId }){
                 <Route path="/profile/:username" element={<ProfilePage id={userId} setRenderDMs={setRenderDMs} />}/>
                 <Route path="/post/:postId" element={<PostPage id={userId}/>} />
                 <Route path="/suggestionbox" element={<SuggestionBox id={userId}/>}/>
+                <Route path="/deleteaccount" element={<DeleteAccount userId={userId}/>}/>
                 <Route path="/" element={<HomePage userId={userId}/>}/>
             </Routes>
         </div>

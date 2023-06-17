@@ -9,8 +9,8 @@ import DMPage from "./components/DMPage.js"
 
 export default function App() {
 
-  const [userId, setUserId] = useState(document.cookie.length ? JSON.parse(document.cookie)["user_id"] : "")
-  const [created, setCreated] = useState(document.cookie.length ? JSON.parse(document.cookie)["created"] : "")
+  const [userId, setUserId] = useState(document.cookie.length ? JSON.parse(document.cookie.substring(5))["user_id"] : "")
+  const [created, setCreated] = useState(document.cookie.length ? JSON.parse(document.cookie.substring(5))["created"] : "")
 
   return (
     <div className="background-div">

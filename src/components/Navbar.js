@@ -53,6 +53,7 @@ export default function Navbar({ userId, renderDMs, setRenderDMs }){
                 <img src={DM} alt="direct messages" style={{height: "80%", cursor: "pointer"}} onClick={() => setRenderDMs(!renderDMs)}/>
                 {musicImgSrc && <img src={musicImgSrc} alt="play theme" style={{height: "50%", marginLeft: "5%", cursor: "pointer"}} onClick={playMusic}/>}
             </div>
+            <img src={noImage} alt="user" style={{cursor: "pointer", height: "65%", borderRadius: "50%", border: "0.25rem solid #cca43b"}} onClick={() => {if (user) window.location.assign(`/app/profile/${user.username}`)}} />
         </nav>
     )
 }

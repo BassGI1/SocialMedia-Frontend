@@ -118,6 +118,7 @@ export default function ProfileEdit({ id, setRenderEdit }){
                 {!loadWhileExpanding && <div className="flex-100">
                     <img src={backArrow} alt="back" className="back-arrow" onClick={() => setRenderEdit(false)}/>
                     <button className="music-init-done flex-100 music-done-hover" style={{position: "absolute", top: "12.5%", right: "11%", cursor: "pointer", zIndex: 3}} onClick={submit}>Complete</button>
+                    <button className="music-init-done flex-100 music-done-hover" style={{position: "absolute", top: "80%", left: "11%", cursor: "pointer", zIndex: 3}} onClick={() => window.location.assign("/app/deleteaccount")}>Delete Account</button>
                     <div className="flex-100" style={{position: "absolute", top: "-33.33%"}}><h1 style={{color: "#363636", fontSize: "3rem", cursor: "default"}}>Edit your profile</h1></div>
                     <div className="change-profile-side-div flex-100" style={{width: "30%", flexDirection: "column"}}>
                         <input type="text" placeholder="Enter new username" style={{width: "60%", color: "black", marginBottom: "3%"}} onChange={(e) => changeInfo["username"] = e.target.value} />
