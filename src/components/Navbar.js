@@ -6,6 +6,7 @@ import play from "../assets/play.png"
 import pause from "../assets/pause.png"
 import noImage from "../assets/noImage.png"
 import search from "../assets/search.png"
+import Harmonize from "../assets/harmonizeLogo.png"
 
 export default function Navbar({ userId, renderDMs, setRenderDMs }){
 
@@ -44,6 +45,7 @@ export default function Navbar({ userId, renderDMs, setRenderDMs }){
 
     return (
         <nav className="navbar">
+            <img src={Harmonize} alt="Harmonize" style={{height: "66.66%", cursor: "pointer"}} onClick={() => window.location.assign("/app")}/>
             <div className="flex-100" style={{width: "50%", justifyContent: "space-evenly"}}>
                 <input placeholder="Search for something"  style={{width: "90%", height: "30%", borderRadius: "2rem", backgroundColor: "transparent", color: "white"}} onChange={(e) => searchText.current = e.target.value} />
                 <img src={search} alt="search" className="search-image-button"/>
