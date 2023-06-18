@@ -329,3 +329,13 @@ body{
 .search-image-button:hover{
   opacity: 0.75;
 }
+
+.dropdown-half-div{
+  height: 50%;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.dropdown-half-div:hover{
+  background-color: #2b3d59;
+}
