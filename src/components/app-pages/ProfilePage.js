@@ -54,13 +54,13 @@ export default function ProfilePage({ id, setRenderDMs }){
             .then(data => setCurrentUser(data))
             .catch(x => console.log(x))
         }
-    }, [])
+    }, [id])
 
     return (
         <div id="click" className={`page-with-navbar-background-div ${user ? "" : "flex-100"}`}>
             {renderEdit ? <ProfileEdit id={id} setRenderEdit={setRenderEdit} /> : ""}
             {user ? user["success"] ? <div>
-                <SideCard id={id} userId={user.id} name={`${user.firstName} ${user.lastName}`} username={username} trackInfo={music ? user["theme"]: null}  created={new Date(user.created)} track={music} edit={id === user["id"]} setRenderEdit={setRenderEdit} followers={user["followers"]} currentUserFollowers={currentUser ? currentUser.followers : null} setRenderDMs={setRenderDMs} />
+                <SideCard id={id} userId={user.id} name={user.name} username={username} trackInfo={music ? user["theme"]: null}  created={new Date(user.created)} track={music} edit={id === user["id"]} setRenderEdit={setRenderEdit} followers={user["followers"]} currentUserFollowers={currentUser ? currentUser.followers : null} setRenderDMs={setRenderDMs}/>
                 <UserPosts username={username} userId={id} create={user["id"] === id} />
             </div> : <UserDNE username={username}/> : <LoadingModal />}
         </div>
@@ -75,6 +75,7 @@ const SideCard = ({ id, userId, name, username, trackInfo, created, track, edit,
     const [changeFollow, setChangeFollow] = useState(true)
     const [DMing, setDMing] = useState(false)
     const [canDM, setCanDM] = useState(false)
+    const [profileImage, setProfileImage] = useState(defaultImage)
 
     useEffect(() => {
         if (track) track.addEventListener("ended", (e) => setImgSrc(play))
@@ -84,7 +85,16 @@ const SideCard = ({ id, userId, name, username, trackInfo, created, track, edit,
         if (currentUserFollowers){
             if (currentUserFollowers.includes(userId) && followers.includes(id)) setCanDM(true)
         }
-    }, [currentUserFollowers])
+    }, [currentUserFollowers, id, userId, followers])
+
+    useEffect(() => {
+        fetch(`http://localhost:5000/api/image?id=${userId}`)
+        .then(res => res.json())
+        .then(data => {
+            if (data) setProfileImage(data.data)
+        })
+        .catch(x => console.log(x))
+    }, [userId])
 
     const followUnfollow = () => {
         if (changeFollow){
@@ -139,7 +149,9 @@ const SideCard = ({ id, userId, name, username, trackInfo, created, track, edit,
             {canDM && <img src={DM} alt="direct message" className="dm-logo" onClick={DMRoom}/>}
             {document.cookie.includes("user_id") && !edit && <img src={followSrc} alt="follow" className="follow-icon" onClick={followUnfollow} style={{left: `${canDM ? "33.7" : "40"}%`}} />}
             <h1 className="flex-100" style={{textAlign: "center", height: "0%"}}>@{username}</h1>
-            <div className="flex-100" style={{height: "25%", transform: "translateY(12.5%)"}}><img alt="nothing" src={defaultImage} className="profile-image"/></div>
+            <div className="flex-100" style={{height: "25%", transform: "translateY(12.5%)"}}><img alt="nothing" src={profileImage} className="profile-image" style={{cursor: edit ? "pointer" : "default"}} onClick={() => {
+                if (edit) window.location.assign("/app/changeprofilepicture")
+            }} /></div>
             <h3 style={{textAlign: "center"}}>{name}<br/>{`${numFollowers} ${numFollowers === 1 ? "follower" : "followers"}`}<br/>{`Joined ${months[created.getMonth()]} ${created.getDate()}, ${created.getFullYear()}`}</h3>
             {trackInfo && <div className="flex-100 music-div">
                 <img src={trackInfo["images"]} style={{width: "40%"}} alt="track logo"/>

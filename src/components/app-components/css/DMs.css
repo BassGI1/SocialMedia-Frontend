@@ -97,6 +97,7 @@
     overflow-x: hidden;
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
+    height: 100%;
 }
 
 .DMs-containerooni::-webkit-scrollbar {

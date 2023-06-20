@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import "./css/DMs.css"
 
 import LoadingModal from "../utils/LoadingModal.js"
-import noImage from "../../assets/noImage.png"
+import defaultImage from "../../assets/noImage.png"
 
 export default function DMSideCard({ userId, setRenderDMs }){
 
@@ -28,18 +28,18 @@ export default function DMSideCard({ userId, setRenderDMs }){
             <div className={`conversation-div ${!DMs ? "flex-100" : ""}`}>
                 {!DMs && <LoadingModal backgroundColor="#1e1b1b" barColor="white" height="5rem" width="5rem" barWidth="5px"/>}
                 {DMs && !DMs.length && <h2 className="flex-100" style={{color: "white"}}>No Direct Messages . . .</h2>}
-                {DMs && DMs.length && <div className="DMs-containerooni flex-100">
-                    {DMs.map((dm, i) => <DM name={dm.name} roomId={dm.roomId} theme={dm.theme} key={i} />)}
+                {DMs && DMs.length && <div className="DMs-containerooni">
+                    {DMs.map((dm, i) => <DM name={dm.name} roomId={dm.roomId} image={dm.image} key={i} />)}
                 </div>}
             </div>
         </div>
     )
 }
 
-const DM = ({ name, roomId, theme }) => {
+const DM = ({ name, roomId, image }) => {
     return (
         <div className="dm-div" onClick={() => window.location.assign(`/room/${roomId}`)}>
-            <img src={noImage} alt="user" style={{height: "40%", borderRadius: "50%", marginRight: "5%", border: "0.2rem solid white"}}/>
+            <img src={image || defaultImage} alt="user" style={{height: "40%", borderRadius: "50%", marginRight: "5%", border: "0.2rem solid white"}}/>
             <h2 style={{color: "white", fontWeight: "lighter"}}>{name}</h2>
         </div>
     )

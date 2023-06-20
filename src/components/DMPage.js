@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react"
 import { useParams } from "react-router-dom"
 import LoadingModal from "./utils/LoadingModal.js"
 
-import noImage from "../assets/noImage.png"
+import defaultImage from "../assets/noImage.png"
 import sendButton from "../assets/sendButton.png"
 import play from "../assets/play.png"
 import pause from "../assets/pause.png"
@@ -31,6 +31,7 @@ export default function DMPage({ userId }){
     const [messages, setMessages] = useState(null)
     const [music, setMusic] = useState(null)
     const [musicImg, setMusicImg] = useState(play)
+    const [profileImage, setProfileImage] = useState(defaultImage)
 
     useEffect(() => {
         fetch(`http://localhost:5000/api/getroom?id=${RoomId}`)
@@ -45,6 +46,11 @@ export default function DMPage({ userId }){
                 else {
                     setOtherUser(userOne)
                     if (userOne.theme) setMusic(new Audio(userOne.theme.preview_url))
+                    fetch(`http://localhost:5000/api/image?id=${userOne.id}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data) setProfileImage(data.data)
+                    })
                 }
             })
             fetch(`http://localhost:5000/api/getuser?_id=${data.userTwo}`)
@@ -54,6 +60,11 @@ export default function DMPage({ userId }){
                 else {
                     setOtherUser(userTwo)
                     if (userTwo.theme) setMusic(new Audio(userTwo.theme.preview_url))
+                    fetch(`http://localhost:5000/api/image?id=${userTwo.id}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data) setProfileImage(data.data)
+                    })
                 }
             })
         })
@@ -92,8 +103,8 @@ export default function DMPage({ userId }){
                 {!currentUser && !otherUser && <LoadingModal backgroundColor="#1e1b1b" barColor="white"/>}
                 {currentUser && otherUser && <div className="messages-background">
                     <div className="top-header-dm-div flex-100">
-                        <img src={noImage} alt="profile" style={{height: "60%", borderRadius: "50%", border: "0.2rem solid white", marginRight: "5%", cursor: "pointer"}} onClick={() => window.location.assign(`/app/profile/${otherUser.username}`)}/>
-                        {`${otherUser.firstName || "deleted"} ${otherUser.lastName || "user"}`}
+                        <img src={profileImage} alt="profile" style={{height: "60%", borderRadius: "50%", border: "0.2rem solid white", marginRight: "5%", cursor: "pointer"}} onClick={() => window.location.assign(`/app/profile/${otherUser.username}`)}/>
+                        {`${otherUser.name || "deleted user"}`}
                         {music && <img src={musicImg} alt={`${musicImg === play ? "play" : "pause"}`}  onClick={playMusic} style={{height: "45%", marginLeft: "5%", cursor: "pointer"}}/>}
                     </div>
                     <Messages messages={messages} currentUserId={currentUser.id}/>

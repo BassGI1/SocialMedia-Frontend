@@ -11,7 +11,7 @@ export default function ProfileEdit({ id, setRenderEdit }){
     const [page, setPage] = useState(0)
     const [musicChoices, setMusicChoices] = useState(["not empty"])
     let password = useRef("").current
-    let changeInfo = useRef({password: "", email: "", username: "", theme: {}, firstName: "", lastName: ""}).current
+    let changeInfo = useRef({password: "", email: "", username: "", theme: {}, name: ""}).current
     let selectedTrack = useRef(null).current
     let q = useRef("").current
 
@@ -55,7 +55,7 @@ export default function ProfileEdit({ id, setRenderEdit }){
         const track = musicChoices.find(x => x.id === id).preview_url
         if (!selectedTrack || track !== selectedTrack.currentSrc) {
             selectedTrack = new Audio(track)
-            selectedTrack.play()
+            selectedTrack.autoplay = true
         }
         else{
             selectedTrack = null
@@ -122,8 +122,7 @@ export default function ProfileEdit({ id, setRenderEdit }){
                     <div className="flex-100" style={{position: "absolute", top: "-33.33%"}}><h1 style={{color: "#363636", fontSize: "3rem", cursor: "default"}}>Edit your profile</h1></div>
                     <div className="change-profile-side-div flex-100" style={{width: "30%", flexDirection: "column"}}>
                         <input type="text" placeholder="Enter new username" style={{width: "60%", color: "black", marginBottom: "3%"}} onChange={(e) => changeInfo["username"] = e.target.value} />
-                        <input type="text" placeholder="Enter new first name" style={{width: "60%", color: "black", marginBottom: "3%"}} onChange={(e) => changeInfo["firstName"] = e.target.value} />
-                        <input type="text" placeholder="Enter new last name" style={{width: "60%", color: "black", marginBottom: "3%"}} onChange={(e) => changeInfo["lastName"] = e.target.value} />
+                        <input type="text" placeholder="Enter new name" style={{width: "60%", color: "black", marginBottom: "3%"}} onChange={(e) => changeInfo["name"] = e.target.value} />
                         <input type="email" placeholder="Enter new email" style={{width: "60%", color: "black", marginBottom: "3%"}} onChange={(e) => changeInfo["email"] = e.target.value} />
                         <input type="password" placeholder="Enter new password" style={{width: "60%", color: "black", marginBottom: "3%"}} onChange={(e) => changeInfo["password"] = e.target.value} />
                     </div>

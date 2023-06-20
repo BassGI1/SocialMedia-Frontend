@@ -42,7 +42,7 @@ export default function FinishSignUp({ id, created }){
         const track = musicChoices.find(x => x.id === id).preview_url
         if (!selectedTrack || track !== selectedTrack.currentSrc) {
             selectedTrack = new Audio(track)
-            selectedTrack.play()
+            selectedTrack.autoplay = true
         }
         else{
             selectedTrack = null
