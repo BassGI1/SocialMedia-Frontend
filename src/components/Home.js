@@ -11,6 +11,7 @@ import DMSideCard from "./app-components/DMSideCard.js"
 import DeleteAccount from "./app-pages/DeleteAccount.js"
 import ChangePicturePage from "./app-pages/ChangePicturePage.js"
 import noImage from "../assets/noImage.png"
+import SearchPage from "./app-pages/SearchPage"
 
 export default function Home({ userId }){
 
@@ -41,6 +42,7 @@ export default function Home({ userId }){
                 <Route path="/suggestionbox" element={<SuggestionBox id={userId}/>}/>
                 <Route path="/deleteaccount" element={<DeleteAccount userId={userId}/>}/>
                 <Route path="/changeprofilepicture" element={<ChangePicturePage userId={userId} setImage={setImage} image={image}/>}/>
+                <Route path="/search" element={<SearchPage />}/>
                 <Route path="/" element={<HomePage userId={userId}/>}/>
             </Routes>
         </div>

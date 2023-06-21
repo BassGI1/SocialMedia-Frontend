@@ -1,0 +1,104 @@
+.title-dividing-section{
+    width: 100%;
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.not-title-other-div{
+    height: 90%;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: 0.2rem solid #cca43b;
+}
+
+.posts-div{
+    height: 100%;
+    width: 65%;
+    position: relative;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+    overflow-x: hidden;
+    border-right: 0.2rem solid #cca43b;
+}
+
+.posts-div::-webkit-scrollbar {
+    display: none;
+}
+
+.users-div{
+    height: 100%;
+    width: 35%;
+    position: relative;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+    overflow-x: hidden;
+}
+
+.users-div::-webkit-scrollbar {
+    display: none;
+}
+
+.post-background-search{
+    width: 100%;
+    height: 33.33%;
+    background-color: #cca43b;
+    box-shadow: 0.2rem 0px 1rem #363636;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.post-background-search:hover{
+    animation: expand-search 0.2s forwards;
+}
+
+@keyframes expand-search {
+    100%{
+        transform: scale(101%);
+    }
+}
+
+.left-div-post{
+    height: 100%;
+    width: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.right-div-post{
+    height: 100%;
+    width: 75%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.underline-hover:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.user-background-search{
+    width: 100%;
+    height: 33.33%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0.1rem 0px 0.25rem #cca43b;
+    cursor: pointer;
+}
+
+.user-background-search:hover{
+    animation: expand-search 0.2s forwards;
+}

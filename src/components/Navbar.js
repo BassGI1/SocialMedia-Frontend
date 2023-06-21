@@ -53,12 +53,8 @@ export default function Navbar({ userId, renderDMs, setRenderDMs, image }){
             <div className="flex-100" style={{width: "50%", justifyContent: "space-evenly"}}>
                 <input placeholder="Search for something"  style={{width: "90%", height: "30%", borderRadius: "2rem", backgroundColor: "transparent", color: "white"}} onChange={(e) => searchText.current = e.target.value} />
                 <img src={search} alt="search" className="search-image-button" onClick={() => {
-                    if (searchText.current.length){
-                        fetch(`http://localhost:5000/api/search?query=${searchText.current}`)
-                        .then(res => res.json())
-                        .then(data => console.log(data))
-                        .catch(x => console.log(x))
-                    }
+                    if (searchText.current.length > 2) window.location.assign(`/app/search?query=${searchText.current}`)
+                    else alert("Search parameter too short!")
                 }}/>
             </div>
             <div style={{width: "15%", display: "flex", justifyContent: "space-evenly", alignItems: "center", height: "100%", alignSelf: "flex-end"}}>
