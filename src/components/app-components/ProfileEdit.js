@@ -39,7 +39,10 @@ export default function ProfileEdit({ id, setRenderEdit }){
                 method: "GET"
             })
             .then(res => res.json())
-            .then(data => setMusicChoices(data))
+            .then(data => {
+                console.log(data)
+                setMusicChoices(data)
+            })
             .catch(x => console.log(x))
         }
     }
