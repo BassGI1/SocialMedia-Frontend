@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 import SignUp from "./components/SignUp"
 import Redirection from "./components/Redirection"
@@ -11,6 +11,8 @@ export default function App() {
 
   const [userId, setUserId] = useState(document.cookie.length ? JSON.parse(document.cookie.substring(5))["user_id"] : "")
   const [created, setCreated] = useState(document.cookie.length ? JSON.parse(document.cookie.substring(5))["created"] : "")
+
+  useEffect(() => console.log(window.innerWidth), [])
 
   return (
     <div className="background-div">
