@@ -6,7 +6,7 @@ import Post from "./Post.js"
 
 export default function UserPosts({ username, userId, create }){
 
-    const [posts, setPosts] = useState([])
+    const [posts, setPosts] = useState(null)
     const [page, setPage] = useState(0)
     const [fetchingPage, setFetchingPage] = useState(false)
     const id = useRef("")
@@ -41,8 +41,10 @@ export default function UserPosts({ username, userId, create }){
             fetch(`http://localhost:5000/api/userposts?id=${id.current}&page=${page + 1}`)
             .then(res => res.json())
             .then(data => {
-                setPosts(p => [...p, ...data])
-                setFetchingPage(false)
+                if (data[0] !== "empty"){
+                    setPosts(p => [...p, ...data])
+                    setFetchingPage(false)
+                }
             })
             .catch(x => console.log(x))
         }
@@ -51,9 +53,9 @@ export default function UserPosts({ username, userId, create }){
     return (
         <div className="user-posts-background flex-100" id="user-posts-background" onScroll={nextFewPosts}>
             {create && <NewPost id={userId}/>}
-            {!posts.length && <LoadingModal />}
-            {(posts.length && posts[0] === "empty") ? <div><h1>. . . There's Nothing Here</h1></div> : ""}
-            {(posts.length) && (posts[0] !== "empty") ? posts.map(post => <Post username={username} title={post.title} text={post.text} created={new Date(post.created)} postId={post._id} likes={post.likes} userId={userId} key={post._id} numReplies={post.replies.length} />) : ""}
+            {!posts && <LoadingModal />}
+            {(posts && posts.length && posts[0] === "empty") ? <div><h1>. . . There's Nothing Here</h1></div> : ""}
+            {(posts && posts.length) && (posts[0] !== "empty") ? posts.map(post => <Post username={username} title={post.title} text={post.text} created={new Date(post.created)} postId={post._id} likes={post.likes} userId={userId} key={post._id} numReplies={post.replies.length} />) : ""}
         </div>
     )
 }

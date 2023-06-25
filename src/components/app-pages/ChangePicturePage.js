@@ -19,6 +19,10 @@ export default function ChangePicturePage({ userId, setImage, image }){
             <div className="flex-100" style={{width: "40%", flexDirection: "column"}}>
                 {newImage && <img src={newImage} style={{height: "60%"}}/>}
                 <input type="file" onChange={(e) => {
+                    if (e.target.files[0].size / (1024 * 1024) > 5){
+                        alert("file size exceeds 5MB!")
+                        window.location.reload()
+                    }
                     const reader = new FileReader()
                     reader.readAsDataURL(e.target.files[0])
                     reader.onloadend = () => {

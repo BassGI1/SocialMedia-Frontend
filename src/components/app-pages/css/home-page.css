@@ -1,0 +1,36 @@
+.homepage-background-div{
+    height: 100%;
+    width: 65%;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+    overflow-y: scroll;
+}
+
+.homepage-background-div::-webkit-scrollbar {
+    display: none;
+}
+
+.followed-post{
+    width: 100%;
+    height: 40%;
+    margin-top: 0.5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 1rem;
+}
+
+.home-post-left-div{
+    width: 25%;
+    height: 100%;
+    position: relative;
+    background-color: green;
+}
+
+.home-post-right-div{
+    width: 75%;
+    height: 100%;
+    position: relative;
+    background-color: blue;
+}
