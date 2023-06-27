@@ -108,13 +108,11 @@ export default function HomePage({ userId }){
                     }
                     else{
                         let x = data.posts.splice(0, 5)
-                        console.log(trends.current)
                         if (trendingIter.current < trends.current.length) x.push(trends.current[trendingIter.current])
                         ++trendingIter.current
                         setPosts(p => {
                             if (trendingIter.current < trends.current.length) return [...p, ...x, ...data.posts, trends.current[trendingIter.current]]
                             return [...p, ...x, ...data.posts]
-                            
                         })
                         ++trendingIter.current
                         setFetching(false)
