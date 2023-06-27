@@ -54,10 +54,11 @@ export default function HomePage({ userId }){
             .then(data => {
                 trending = data.posts
                 trends.current = data.posts
+                console.log(data)
                 for (const user of data.users){
-                    if (!users.current[user._id]) users.current[user._id] = user
+                    if (users.current && !users.current[user._id]) users.current[user._id] = user
                 }
-                if (followed.length){
+                if (followed && followed.length){
                     if (followed.length < 5) setPosts([...followed, trending[0]])
                     else{
                         let x = followed.splice(0, 5)
@@ -72,6 +73,9 @@ export default function HomePage({ userId }){
                         }
                         setPosts(x)
                     }
+                }
+                else{
+                    setPosts(["empty"])
                 }
             })
             .catch(x => console.log(x))
@@ -124,8 +128,8 @@ export default function HomePage({ userId }){
     return (
         <div className="flex-100" style={{height: "87.5%"}}>
            {!posts && <LoadingModal />}
-           {posts && !posts.length && <h1>. . . There's nothing here</h1>}
-           {posts && posts.length && <div className="homepage-background-div" id="home-page-scroller" onScroll={paginate}>
+           {posts && posts[0] === "empty" && <h1>. . . There's nothing here</h1>}
+           {posts && posts.length && posts[0] !== "empty" && <div className="homepage-background-div" id="home-page-scroller" onScroll={paginate}>
                 {posts.map((post, i) => <FollowedPost {...post} created={new Date(post.created)} key={i} index={i} usersObj={users.current} userId={userId} playMusic={playMusic}/>)}
             </div>}
         </div>
