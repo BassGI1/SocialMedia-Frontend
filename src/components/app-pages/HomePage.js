@@ -166,7 +166,7 @@ const FollowedPost = ({ _id, by, created, likes, replies, text, title, usersObj,
     return (
         <div className="followed-post">
             <div className="home-post-left-div flex-100" style={{backgroundImage: `url(${user.image.data ? user.image.data : defaultImage})`}}>
-                {((index !== 0) && (index % 5 === 0)) && <img src={flame} alt="trending!" className="flame"/>}
+                {((index !== 0) && (index % 6 === 5)) && <img src={flame} alt="trending!" className="flame"/>}
                 <div className="flex-100" style={{height: "20%"}}>
                     <h2 className="underline-hover" style={{fontWeight: "900", textShadow: "0 0 3px black, 0 0 5px black"}} onClick={() => window.location.assign(`/app/profile/${usersObj[by].username}`)}>@{usersObj[by].username}</h2>
                 </div>
