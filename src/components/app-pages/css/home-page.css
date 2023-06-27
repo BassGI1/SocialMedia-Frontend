@@ -1,6 +1,6 @@
 .homepage-background-div{
     height: 100%;
-    width: 65%;
+    width: 69%;
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
     overflow-y: scroll;
@@ -19,18 +19,51 @@
     align-items: center;
     overflow: hidden;
     border-radius: 1rem;
+    background-color: #cca43b;
+    flex-direction: column;
+    flex-direction: row;
 }
 
 .home-post-left-div{
     width: 25%;
     height: 100%;
     position: relative;
-    background-color: green;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
 }
 
 .home-post-right-div{
     width: 75%;
     height: 100%;
     position: relative;
-    background-color: blue;
+    cursor: pointer;
+    box-sizing: border-box;
+    padding: 2.5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.flame{
+    position: absolute;
+    height: 25%;
+    animation: flame 0.5s forwards infinite;
+    left: 5%;
+    top: 3%;
+}
+
+@keyframes flame {
+    50%{
+        opacity: 0.5;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
+.home-page-heart{
+    height: 80%;
+    cursor: pointer;
 }

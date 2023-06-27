@@ -72,7 +72,7 @@ export default function Post({ postId, title, text, likes, created, username, us
                         <h5 style={{position: "absolute", left: "52.5%"}}>{numReplies === 0 ? "no" : numReplies} {numReplies === 1 ? "reply" : "replies"}</h5>
                     </div>
                 </div>}
-                <h6 style={{width: "90%", textAlign: "center"}}>{text.length > 295 ? `${text.substring(0, 292)}...` : text}</h6>
+                <h6 style={{width: "90%", textAlign: "center"}}>{text.length > 250 ? `${text.substring(0, 250)}...` : text}</h6>
             </div>
         </div>
     )
