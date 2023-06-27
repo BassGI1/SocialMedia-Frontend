@@ -42,22 +42,22 @@ export default function HomePage({ userId }){
     useEffect(() => {
         (async () => {
             let followed, trending
-            await fetch(`https://iedl3ci5va6dyptka0nmbag3gzkqxa.onrender.com/api/followedposts?id=${userId}&page=0`)
+            await fetch(`http://localhost:5000/api/followedposts?id=${userId}&page=0`)
             .then(res => res.json())
             .then(data => {
                 users.current = data.usersObj
                 followed = data.posts
             })
             .catch(x => console.log(x))
-            fetch("https://iedl3ci5va6dyptka0nmbag3gzkqxa.onrender.com/api/trending")
+            fetch("http://localhost:5000/api/trending")
             .then(res => res.json())
             .then(data => {
                 trending = data.posts
                 trends.current = data.posts
                 for (const user of data.users){
-                    if (!users.current[user._id]) users.current[user._id] = user
+                    if (users.current && !users.current[user._id]) users.current[user._id] = user
                 }
-                if (followed.length){
+                if (followed && followed.length){
                     if (followed.length < 5) setPosts([...followed, trending[0]])
                     else{
                         let x = followed.splice(0, 5)
@@ -72,6 +72,9 @@ export default function HomePage({ userId }){
                         }
                         setPosts(x)
                     }
+                }
+                else{
+                    setPosts(["empty"])
                 }
             })
             .catch(x => console.log(x))
@@ -91,7 +94,7 @@ export default function HomePage({ userId }){
         if ((PlusMinus(div.scrollTop, (posts.length - 2.5)*postHeight, 2)) && !fetching){
             setFetching(true)
             ++page.current
-            fetch(`https://iedl3ci5va6dyptka0nmbag3gzkqxa.onrender.com/api/followedposts?id=${userId}&page=${page.current}`)
+            fetch(`http://localhost:5000/api/followedposts?id=${userId}&page=${page.current}`)
             .then(res => res.json())
             .then(data => {
                 users.current = {...users.current, ...data.usersObj}
@@ -124,8 +127,8 @@ export default function HomePage({ userId }){
     return (
         <div className="flex-100" style={{height: "87.5%"}}>
            {!posts && <LoadingModal />}
-           {posts && !posts.length && <h1>. . . There's nothing here</h1>}
-           {posts && posts.length && <div className="homepage-background-div" id="home-page-scroller" onScroll={paginate}>
+           {posts && posts[0] === "empty" && <h1>. . . There's nothing here</h1>}
+           {posts && posts.length && posts[0] !== "empty" && <div className="homepage-background-div" id="home-page-scroller" onScroll={paginate}>
                 {posts.map((post, i) => <FollowedPost {...post} created={new Date(post.created)} key={i} index={i} usersObj={users.current} userId={userId} playMusic={playMusic}/>)}
             </div>}
         </div>
@@ -151,7 +154,7 @@ const FollowedPost = ({ _id, by, created, likes, replies, text, title, usersObj,
             else setNumLikes(numLikes - 1)
             changeHeartSrc()
         }
-        fetch("https://iedl3ci5va6dyptka0nmbag3gzkqxa.onrender.com/api/changelikestatus", {
+        fetch("http://localhost:5000/api/changelikestatus", {
             method: "POST",
             body: JSON.stringify({userId: userId, id: _id}),
             headers: {"Content-Type": "application/json"}
