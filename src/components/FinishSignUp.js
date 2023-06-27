@@ -22,7 +22,7 @@ export default function FinishSignUp({ id, created }){
             setPage(0)
             selectedTrack = null
             setMusicChoices([])
-            fetch(`http://localhost:5000/api/searchfortrack?q=${q}`, {
+            fetch(`https://iedl3ci5va6dyptka0nmbag3gzkqxa.onrender.com/api/searchfortrack?q=${q}`, {
                 method: "GET"
             })
             .then(res => res.json())
@@ -55,7 +55,7 @@ export default function FinishSignUp({ id, created }){
     }
 
     const submit = () => {
-        fetch("http://localhost:5000/api/changemusic", {
+        fetch("https://iedl3ci5va6dyptka0nmbag3gzkqxa.onrender.com/api/changemusic", {
             method: "POST",
             body: JSON.stringify({
                 _id: id,

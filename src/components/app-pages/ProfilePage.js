@@ -38,7 +38,7 @@ export default function ProfilePage({ id, setRenderDMs }){
     const [renderEdit, setRenderEdit] = useState(false)
 
     useEffect(() => {
-        fetch(`http://localhost:5000/api/getuser?username=${username}`)
+        fetch(`https://iedl3ci5va6dyptka0nmbag3gzkqxa.onrender.com/api/getuser?username=${username}`)
         .then(res => res.json())
         .then(data => {
             setUser(data)
@@ -49,7 +49,7 @@ export default function ProfilePage({ id, setRenderDMs }){
 
     useEffect(() => {
         if (id){
-            fetch(`http://localhost:5000/api/getuser?_id=${id}`)
+            fetch(`https://iedl3ci5va6dyptka0nmbag3gzkqxa.onrender.com/api/getuser?_id=${id}`)
             .then(res => res.json())
             .then(data => setCurrentUser(data))
             .catch(x => console.log(x))
@@ -88,7 +88,7 @@ const SideCard = ({ id, userId, name, username, trackInfo, created, track, edit,
     }, [currentUserFollowers, id, userId, followers])
 
     useEffect(() => {
-        fetch(`http://localhost:5000/api/image?id=${userId}`)
+        fetch(`https://iedl3ci5va6dyptka0nmbag3gzkqxa.onrender.com/api/image?id=${userId}`)
         .then(res => res.json())
         .then(data => {
             if (data) setProfileImage(data.data)
@@ -109,7 +109,7 @@ const SideCard = ({ id, userId, name, username, trackInfo, created, track, edit,
                 setNumFollowers(numFollowers - 1)
                 if (canDM) setCanDM(false)
             }
-            fetch(`http://localhost:5000/api/changefollowstatus`, {
+            fetch(`https://iedl3ci5va6dyptka0nmbag3gzkqxa.onrender.com/api/changefollowstatus`, {
                 method: "POST",
                 body: JSON.stringify({
                     followeeId: userId,
@@ -126,7 +126,7 @@ const SideCard = ({ id, userId, name, username, trackInfo, created, track, edit,
     const DMRoom = () => {
         if (!DMing){
             setDMing(true)
-            fetch("http://localhost:5000/api/createroom", {
+            fetch("https://iedl3ci5va6dyptka0nmbag3gzkqxa.onrender.com/api/createroom", {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({

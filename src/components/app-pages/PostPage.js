@@ -44,7 +44,7 @@ export default function PostPage({ id }){
     const music = useRef(null)
 
     useEffect(() => {
-        fetch(`http://localhost:5000/api/getpost?id=${postId}`)
+        fetch(`https://iedl3ci5va6dyptka0nmbag3gzkqxa.onrender.com/api/getpost?id=${postId}`)
         .then(res => res.json())
         .then(data => {
             if (Object.keys(data).includes("success")){
@@ -55,14 +55,14 @@ export default function PostPage({ id }){
             setNumLikes(data["likes"].length)
             if (data["likes"].includes(id)) setHeartSrc(filled)
             else setHeartSrc(unfilled)
-            fetch(`http://localhost:5000/api/getuser?_id=${data["by"]}`)
+            fetch(`https://iedl3ci5va6dyptka0nmbag3gzkqxa.onrender.com/api/getuser?_id=${data["by"]}`)
             .then(res => res.json())
             .then(x => setPoster(x))
         })
         .catch(x => console.log(x))
 
         setFetchingPage(true)
-        fetch(`http://localhost:5000/api/getreplies?postId=${postId}&page=${0}`)
+        fetch(`https://iedl3ci5va6dyptka0nmbag3gzkqxa.onrender.com/api/getreplies?postId=${postId}&page=${0}`)
         .then(res => res.json())
         .then(data => {
             setReplies(data)
@@ -83,7 +83,7 @@ export default function PostPage({ id }){
         if ((PlusMinus(div.scrollTop, (page*10 + 15)*replyHeight, 2) && !fetchingPage)){
             setPage(page + 1)
             setFetchingPage(true)
-            fetch(`http://localhost:5000/api/getreplies?postId=${postId}&page=${page + 1}`)
+            fetch(`https://iedl3ci5va6dyptka0nmbag3gzkqxa.onrender.com/api/getreplies?postId=${postId}&page=${page + 1}`)
             .then(res => res.json())
             .then(data => {
                 setReplies(r => [...r, ...data])
@@ -109,7 +109,7 @@ export default function PostPage({ id }){
             else setNumLikes(numLikes - 1)
             changeHeartSrc()
         }
-        fetch("http://localhost:5000/api/changelikestatus", {
+        fetch("https://iedl3ci5va6dyptka0nmbag3gzkqxa.onrender.com/api/changelikestatus", {
             method: "POST",
             body: JSON.stringify({userId: id, id: postId}),
             headers: {"Content-Type": "application/json"}
@@ -122,7 +122,7 @@ export default function PostPage({ id }){
     const confirmYes = () => {
         if (!deleting){
             setDeleting(true)
-            fetch("http://localhost:5000/api/deletepost", {
+            fetch("https://iedl3ci5va6dyptka0nmbag3gzkqxa.onrender.com/api/deletepost", {
                 method: "POST",
                 body: JSON.stringify({
                     postId: post._id
@@ -220,7 +220,7 @@ const CreateReply = ({ id, postId }) => {
         if (!postText.current.length) alert("Your reply is empty!")
         else if (!replying){
             setReplying(true)
-            fetch("http://localhost:5000/api/createreply", {
+            fetch("https://iedl3ci5va6dyptka0nmbag3gzkqxa.onrender.com/api/createreply", {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({
@@ -270,7 +270,7 @@ const Reply = ({userId, id, likes, text, user, created, music, postId}) => {
     const likeUnlike = () => {
         if (changeLikedStatus){
             setChangeLikedStatus(false)
-            fetch("http://localhost:5000/api/likereply", {
+            fetch("https://iedl3ci5va6dyptka0nmbag3gzkqxa.onrender.com/api/likereply", {
                 method: "POST",
                 body: JSON.stringify({
                     replyId: id,
@@ -297,7 +297,7 @@ const Reply = ({userId, id, likes, text, user, created, music, postId}) => {
     const deleteReply = () => {
         if (!deleting){
             setDeleting(true)
-            fetch("http://localhost:5000/api/deletereply", {
+            fetch("https://iedl3ci5va6dyptka0nmbag3gzkqxa.onrender.com/api/deletereply", {
                 method: "POST",
                 body: JSON.stringify({
                     userId: userId,
