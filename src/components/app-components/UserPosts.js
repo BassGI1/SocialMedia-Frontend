@@ -24,6 +24,7 @@ export default function UserPosts({ username, userId, create }){
             .then(data => setPosts(data))
             .catch(x => console.log(x))
         })()
+        // eslint-disable-next-line
     }, [username])
 
     const PlusMinus = (first, second, percentage) => {
