@@ -54,7 +54,6 @@ export default function HomePage({ userId }){
             .then(data => {
                 trending = data.posts
                 trends.current = data.posts
-                console.log(data)
                 for (const user of data.users){
                     if (users.current && !users.current[user._id]) users.current[user._id] = user
                 }
@@ -109,7 +108,6 @@ export default function HomePage({ userId }){
                     }
                     else{
                         let x = data.posts.splice(0, 5)
-                        console.log(trends.current)
                         if (trendingIter.current < trends.current.length) x.push(trends.current[trendingIter.current])
                         ++trendingIter.current
                         setPosts(p => {
