@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 
 import SignUp from "./components/SignUp"
 import Redirection from "./components/Redirection"

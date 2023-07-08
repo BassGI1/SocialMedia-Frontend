@@ -10,14 +10,14 @@ export default function ChangePicturePage({ userId, setImage, image }){
     return (
         <div className="flex-100" style={{height: "87.5%"}}>
             <div className="flex-100" style={{width: "40%", flexDirection: "column"}}>
-                <img src={image || defaultImage} style={{height: "60%"}}/>
+                <img src={image || defaultImage} alt="current" style={{height: "60%"}}/>
                 <h2>Current Image</h2>
             </div>
             <div className="flex-100" style={{width: "20%"}}>
                 <h1 style={{fontSize: "6rem", fontWeight: "900"}}>→</h1>
             </div>
             <div className="flex-100" style={{width: "40%", flexDirection: "column"}}>
-                {newImage && <img src={newImage} style={{height: "60%"}}/>}
+                {newImage && <img src={newImage} alt="new" style={{height: "60%"}}/>}
                 <input type="file" onChange={(e) => {
                     if (e.target.files[0].size / (1024 * 1024) > 5){
                         alert("file size exceeds 5MB!")
