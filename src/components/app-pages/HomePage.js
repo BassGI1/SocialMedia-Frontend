@@ -123,12 +123,14 @@ export default function HomePage({ userId }){
         }
     }
 
+    console.log(posts)
+
     return (
         <div className="flex-100" style={{height: "87.5%"}}>
            {!posts && <LoadingModal />}
            {posts && posts[0] === "empty" && <h1>. . . There's nothing here</h1>}
            {posts && posts.length && posts[0] !== "empty" && <div className="homepage-background-div" id="home-page-scroller" onScroll={paginate}>
-                {posts.map((post, i) => <FollowedPost {...post} created={new Date(post.created)} key={i} index={i} usersObj={users.current} userId={userId} playMusic={playMusic}/>)}
+                {posts.map((post, i) => post && <FollowedPost {...post} created={new Date(post.created)} key={i} index={i} usersObj={users.current} userId={userId} playMusic={playMusic}/>)}
             </div>}
         </div>
     )
