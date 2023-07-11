@@ -31,7 +31,7 @@ export default function SearchPage(){
     const music = useRef(null)
     
     useEffect(() => {
-        fetch(`http://localhost:5000/api/search?query=${parseURL()}`)
+        fetch(`https://harmonise-backend-server.onrender.com/api/search?query=${parseURL()}`)
         .then(res => res.json())
         .then(data => {
             setPosts(data.posts)

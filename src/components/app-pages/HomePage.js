@@ -42,14 +42,14 @@ export default function HomePage({ userId }){
     useEffect(() => {
         (async () => {
             let followed, trending
-            await fetch(`http://localhost:5000/api/followedposts?id=${userId}&page=0`)
+            await fetch(`https://harmonise-backend-server.onrender.com/api/followedposts?id=${userId}&page=0`)
             .then(res => res.json())
             .then(data => {
                 users.current = data.usersObj
                 followed = data.posts
             })
             .catch(x => console.log(x))
-            fetch("http://localhost:5000/api/trending")
+            fetch("https://harmonise-backend-server.onrender.com/api/trending")
             .then(res => res.json())
             .then(data => {
                 trending = data.posts
@@ -94,7 +94,7 @@ export default function HomePage({ userId }){
         if ((PlusMinus(div.scrollTop, (posts.length - 2.5)*postHeight, 2)) && !fetching){
             setFetching(true)
             ++page.current
-            fetch(`http://localhost:5000/api/followedposts?id=${userId}&page=${page.current}`)
+            fetch(`https://harmonise-backend-server.onrender.com/api/followedposts?id=${userId}&page=${page.current}`)
             .then(res => res.json())
             .then(data => {
                 users.current = {...users.current, ...data.usersObj}
@@ -113,7 +113,6 @@ export default function HomePage({ userId }){
                         setPosts(p => {
                             if (trendingIter.current < trends.current.length) return [...p, ...x, ...data.posts, trends.current[trendingIter.current]]
                             return [...p, ...x, ...data.posts]
-                            
                         })
                         ++trendingIter.current
                         setFetching(false)
@@ -155,7 +154,7 @@ const FollowedPost = ({ _id, by, created, likes, replies, text, title, usersObj,
             else setNumLikes(numLikes - 1)
             changeHeartSrc()
         }
-        fetch("http://localhost:5000/api/changelikestatus", {
+        fetch("https://harmonise-backend-server.onrender.com/api/changelikestatus", {
             method: "POST",
             body: JSON.stringify({userId: userId, id: _id}),
             headers: {"Content-Type": "application/json"}

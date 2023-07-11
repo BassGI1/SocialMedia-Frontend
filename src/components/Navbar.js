@@ -21,7 +21,7 @@ export default function Navbar({ userId, renderDMs, setRenderDMs, image }){
     
     useEffect(() => {
         if (!user){
-            fetch(`http://localhost:5000/api/getuser?_id=${userId}`)
+            fetch(`https://harmonise-backend-server.onrender.com/api/getuser?_id=${userId}`)
             .then(res => res.json())
             .then(data => {
                 setUser(data)

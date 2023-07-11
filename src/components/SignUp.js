@@ -41,7 +41,7 @@ function SignInInfo({ setUserId, setCreated }) {
     let info = useRef({email: "", password: ""}).current
 
     const submit = () => {
-        fetch("http://localhost:5000/api/login", {method: "POST", body: JSON.stringify(info), headers: {"Content-Type": "application/json"}})
+        fetch("https://harmonise-backend-server.onrender.com/api/login", {method: "POST", body: JSON.stringify(info), headers: {"Content-Type": "application/json"}})
         .then(res => res.json())
         .then(data => {
             if (data["success"]){
@@ -93,7 +93,7 @@ function SignUpInfo({ setUserId, setCreated }){
             alert("Invalid input")
             return
         }
-        fetch("http://localhost:5000/api/signup", {method: "POST", body: JSON.stringify({...info, created: new Date()}), headers: {"Content-Type": "application/json"}})
+        fetch("https://harmonise-backend-server.onrender.com/api/signup", {method: "POST", body: JSON.stringify({...info, created: new Date()}), headers: {"Content-Type": "application/json"}})
         .then(res => res.json())
         .then(data => {
             if (data["success"]){

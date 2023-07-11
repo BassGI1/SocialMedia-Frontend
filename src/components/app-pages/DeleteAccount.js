@@ -9,7 +9,7 @@ export default function DeleteAccount({ userId }){
         if (!password.current.length) alert("The password field is empty!")
         else if (!deleting){
             setDeleting(true)
-            fetch("http://localhost:5000/api/deleteuser", {
+            fetch("https://harmonise-backend-server.onrender.com/api/deleteuser", {
                 method: "POST",
                 body: JSON.stringify({
                     id: userId,

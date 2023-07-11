@@ -42,7 +42,7 @@ export default function Post({ postId, title, text, likes, created, username, us
             else setNumLikes(numLikes - 1)
             changeHeartSrc()
         }
-        fetch("http://localhost:5000/api/changelikestatus", {
+        fetch("https://harmonise-backend-server.onrender.com/api/changelikestatus", {
             method: "POST",
             body: JSON.stringify({userId: userId, id: postId}),
             headers: {"Content-Type": "application/json"}
