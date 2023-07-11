@@ -16,7 +16,7 @@ export default function ProfileEdit({ id, setRenderEdit }){
     let q = useRef("").current
 
     const checkPassword = () => {
-        fetch(`https://iedl3ci5va6dyptka0nmbag3gzkqxa.onrender.com/api/getuser?_id=${id}&password=${password}`)
+        fetch(`https://harmonise-backend-server.onrender.com/api/getuser?_id=${id}&password=${password}`)
         .then(res => res.json())
         .then(data => {
             if (data["success"]) {
@@ -35,7 +35,7 @@ export default function ProfileEdit({ id, setRenderEdit }){
             setPage(0)
             selectedTrack = null
             setMusicChoices([])
-            fetch(`https://iedl3ci5va6dyptka0nmbag3gzkqxa.onrender.com/api/searchfortrack?q=${q}`, {
+            fetch(`https://harmonise-backend-server.onrender.com/api/searchfortrack?q=${q}`, {
                 method: "GET"
             })
             .then(res => res.json())
@@ -69,7 +69,7 @@ export default function ProfileEdit({ id, setRenderEdit }){
 
     const submit = async () => {
         let status = false
-        await fetch(`https://iedl3ci5va6dyptka0nmbag3gzkqxa.onrender.com/api/getuser?username=${changeInfo["username"]}`)
+        await fetch(`https://harmonise-backend-server.onrender.com/api/getuser?username=${changeInfo["username"]}`)
         .then(res => res.json())
         .then(data => status = data["success"])
         .catch(x => console.log(x))
@@ -77,7 +77,7 @@ export default function ProfileEdit({ id, setRenderEdit }){
             alert("Username already taken")
             return
         }
-        await fetch(`https://iedl3ci5va6dyptka0nmbag3gzkqxa.onrender.com/api/getuser?email=${changeInfo["email"]}`)
+        await fetch(`https://harmonise-backend-server.onrender.com/api/getuser?email=${changeInfo["email"]}`)
         .then(res => res.json())
         .then(data => status = data["success"])
         .catch(x => console.log(x))
@@ -93,7 +93,7 @@ export default function ProfileEdit({ id, setRenderEdit }){
             _id: id
         }
         if (selectedTrack) body["theme"] = musicChoices.find(x => x.preview_url === selectedTrack.currentSrc)
-        fetch(`https://iedl3ci5va6dyptka0nmbag3gzkqxa.onrender.com/api/edituser`, {
+        fetch(`https://harmonise-backend-server.onrender.com/api/edituser`, {
             method: "POST",
             body: JSON.stringify(body),
             headers: {"Content-Type": "application/json"}

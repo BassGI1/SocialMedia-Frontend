@@ -9,7 +9,7 @@ export default function SuggestionBox({ id }){
         if (!suggestion.current.length) alert("You haven't entered anything!")
         else if (canSuggest){
             setCanSuggest(false)
-            fetch("https://iedl3ci5va6dyptka0nmbag3gzkqxa.onrender.com/api/suggest", {
+            fetch("https://harmonise-backend-server.onrender.com/api/suggest", {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({id: id, text: suggestion.current})

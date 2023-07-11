@@ -34,7 +34,7 @@ export default function ChangePicturePage({ userId, setImage, image }){
                 if (!changingImage){
                     setChangingImage(true)
                     setImage(newImage)
-                    fetch("https://iedl3ci5va6dyptka0nmbag3gzkqxa.onrender.com/api/image", {
+                    fetch("https://harmonise-backend-server.onrender.com/api/image", {
                         method: "POST",
                         headers: {"Content-Type": "application/json"},
                         body: JSON.stringify({imageString: newImage, id: userId})

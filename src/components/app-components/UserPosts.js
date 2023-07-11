@@ -14,12 +14,12 @@ export default function UserPosts({ username, userId, create }){
     useEffect(() => {
         (async () => {
             if (!id.current.length){
-                await fetch(`https://iedl3ci5va6dyptka0nmbag3gzkqxa.onrender.com/api/getuser?username=${username}`)
+                await fetch(`https://harmonise-backend-server.onrender.com/api/getuser?username=${username}`)
                 .then(res => res.json())
                 .then(data => id.current = data["id"])
                 .catch(x => console.log(x))
             }
-            fetch(`https://iedl3ci5va6dyptka0nmbag3gzkqxa.onrender.com/api/userposts?id=${id.current}&page=${page}`)
+            fetch(`https://harmonise-backend-server.onrender.com/api/userposts?id=${id.current}&page=${page}`)
             .then(res => res.json())
             .then(data => setPosts(data))
             .catch(x => console.log(x))
@@ -39,7 +39,7 @@ export default function UserPosts({ username, userId, create }){
         if ((PlusMinus(div.scrollTop, (page*10 + 7)*postHeight, 2) && !fetchingPage)){
             setPage(page + 1)
             setFetchingPage(true)
-            fetch(`https://iedl3ci5va6dyptka0nmbag3gzkqxa.onrender.com/api/userposts?id=${id.current}&page=${page + 1}`)
+            fetch(`https://harmonise-backend-server.onrender.com/api/userposts?id=${id.current}&page=${page + 1}`)
             .then(res => res.json())
             .then(data => {
                 if (data[0] !== "empty"){
@@ -77,7 +77,7 @@ const NewPost = ({ id }) => {
         }
         if (!posting){
             setPosting(true)
-            fetch(`https://iedl3ci5va6dyptka0nmbag3gzkqxa.onrender.com/api/userposts`, {
+            fetch(`https://harmonise-backend-server.onrender.com/api/userposts`, {
                 method: "POST",
                 body: JSON.stringify({
                     id: id,

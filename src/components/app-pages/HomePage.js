@@ -42,14 +42,14 @@ export default function HomePage({ userId }){
     useEffect(() => {
         (async () => {
             let followed, trending
-            await fetch(`https://iedl3ci5va6dyptka0nmbag3gzkqxa.onrender.com/api/followedposts?id=${userId}&page=0`)
+            await fetch(`https://harmonise-backend-server.onrender.com/api/followedposts?id=${userId}&page=0`)
             .then(res => res.json())
             .then(data => {
                 users.current = data.usersObj
                 followed = data.posts
             })
             .catch(x => console.log(x))
-            fetch("https://iedl3ci5va6dyptka0nmbag3gzkqxa.onrender.com/api/trending")
+            fetch("https://harmonise-backend-server.onrender.com/api/trending")
             .then(res => res.json())
             .then(data => {
                 trending = data.posts
@@ -94,7 +94,7 @@ export default function HomePage({ userId }){
         if ((PlusMinus(div.scrollTop, (posts.length - 2.5)*postHeight, 2)) && !fetching){
             setFetching(true)
             ++page.current
-            fetch(`https://iedl3ci5va6dyptka0nmbag3gzkqxa.onrender.com/api/followedposts?id=${userId}&page=${page.current}`)
+            fetch(`https://harmonise-backend-server.onrender.com/api/followedposts?id=${userId}&page=${page.current}`)
             .then(res => res.json())
             .then(data => {
                 users.current = {...users.current, ...data.usersObj}
@@ -152,7 +152,7 @@ const FollowedPost = ({ _id, by, created, likes, replies, text, title, usersObj,
             else setNumLikes(numLikes - 1)
             changeHeartSrc()
         }
-        fetch("https://iedl3ci5va6dyptka0nmbag3gzkqxa.onrender.com/api/changelikestatus", {
+        fetch("https://harmonise-backend-server.onrender.com/api/changelikestatus", {
             method: "POST",
             body: JSON.stringify({userId: userId, id: _id}),
             headers: {"Content-Type": "application/json"}

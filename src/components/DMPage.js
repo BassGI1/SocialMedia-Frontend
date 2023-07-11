@@ -34,33 +34,33 @@ export default function DMPage({ userId }){
     const [profileImage, setProfileImage] = useState(defaultImage)
 
     useEffect(() => {
-        fetch(`https://iedl3ci5va6dyptka0nmbag3gzkqxa.onrender.com/api/getroom?id=${RoomId}`)
+        fetch(`https://harmonise-backend-server.onrender.com/api/getroom?id=${RoomId}`)
         .then(res => res.json())
         .then(data => {
             setRoom(data)
             if (data.userOne !== userId && data.userTwo !== userId) window.location.assign("/")
-            fetch(`https://iedl3ci5va6dyptka0nmbag3gzkqxa.onrender.com/api/getuser?_id=${data.userOne}`)
+            fetch(`https://harmonise-backend-server.onrender.com/api/getuser?_id=${data.userOne}`)
             .then(res => res.json())
             .then(userOne => {
                 if (userOne.id === userId) setCurrentUser(userOne)
                 else {
                     setOtherUser(userOne)
                     if (userOne.theme) setMusic(new Audio(userOne.theme.preview_url))
-                    fetch(`https://iedl3ci5va6dyptka0nmbag3gzkqxa.onrender.com/api/image?id=${userOne.id}`)
+                    fetch(`https://harmonise-backend-server.onrender.com/api/image?id=${userOne.id}`)
                     .then(res => res.json())
                     .then(data => {
                         if (data) setProfileImage(data.data)
                     })
                 }
             })
-            fetch(`https://iedl3ci5va6dyptka0nmbag3gzkqxa.onrender.com/api/getuser?_id=${data.userTwo}`)
+            fetch(`https://harmonise-backend-server.onrender.com/api/getuser?_id=${data.userTwo}`)
             .then(res => res.json())
             .then(userTwo => {
                 if (userTwo.id === userId) setCurrentUser(userTwo)
                 else {
                     setOtherUser(userTwo)
                     if (userTwo.theme) setMusic(new Audio(userTwo.theme.preview_url))
-                    fetch(`https://iedl3ci5va6dyptka0nmbag3gzkqxa.onrender.com/api/image?id=${userTwo.id}`)
+                    fetch(`https://harmonise-backend-server.onrender.com/api/image?id=${userTwo.id}`)
                     .then(res => res.json())
                     .then(data => {
                         if (data) setProfileImage(data.data)
@@ -70,7 +70,7 @@ export default function DMPage({ userId }){
         })
         .catch(x => console.log(x))
         setInterval(() => {
-            fetch(`https://iedl3ci5va6dyptka0nmbag3gzkqxa.onrender.com/api/getroom?id=${RoomId}`)
+            fetch(`https://harmonise-backend-server.onrender.com/api/getroom?id=${RoomId}`)
             .then(res => res.json())
             .then(data => {
                 const m = [...data.messages].reverse()
@@ -123,7 +123,7 @@ const WriteMessage = ({ roomId, userId }) => {
     const send = () => {
         if (!sending && text.current.length){
             setSending(true)
-            fetch("https://iedl3ci5va6dyptka0nmbag3gzkqxa.onrender.com/api/sendmessage", {
+            fetch("https://harmonise-backend-server.onrender.com/api/sendmessage", {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({

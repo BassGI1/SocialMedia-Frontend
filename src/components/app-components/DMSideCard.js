@@ -10,7 +10,7 @@ export default function DMSideCard({ userId, setRenderDMs }){
     const [DMs, setDMs] = useState(null)
 
     useEffect(() => {
-        fetch(`https://iedl3ci5va6dyptka0nmbag3gzkqxa.onrender.com/api/getallroomsforuser?id=${userId}`)
+        fetch(`https://harmonise-backend-server.onrender.com/api/getallroomsforuser?id=${userId}`)
         .then(res => res.json())
         .then(data => setDMs(data))
         .catch(x => console.log(x))

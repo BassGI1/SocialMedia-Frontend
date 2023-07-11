@@ -22,7 +22,7 @@ export default function Home({ userId }){
 
     useEffect(() => {
         if (!image.length){
-            fetch(`https://iedl3ci5va6dyptka0nmbag3gzkqxa.onrender.com/api/image?id=${userId}`)
+            fetch(`https://harmonise-backend-server.onrender.com/api/image?id=${userId}`)
             .then(res => res.json())
             .then(data => {
                 if (!data) setImage(noImage)
